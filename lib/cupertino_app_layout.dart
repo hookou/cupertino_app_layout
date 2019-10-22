@@ -6,6 +6,8 @@ library hookou;
  */
 import 'package:flutter/cupertino.dart';
 
+const double TAB_BAR_HEIGHT = 50;
+
 /// 页面布局类
 class CupertinoAppTabScaffold extends StatefulWidget {
   final Widget tabbar;
@@ -29,7 +31,10 @@ class CupertinoAppTabScaffoldState extends State<CupertinoAppTabScaffold> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        widget.tabBuilder,
+        Container(
+          padding: EdgeInsets.only(bottom: TAB_BAR_HEIGHT),
+          child: widget.tabBuilder,
+        ),
         Positioned(
           left: 0,
           bottom: 0,
@@ -92,7 +97,7 @@ class CupertinoAppTabBarState extends State<CupertinoAppTabBar> {
 
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: TAB_BAR_HEIGHT,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         border: widget.border,
@@ -124,7 +129,9 @@ class CupertinoAppTabBarState extends State<CupertinoAppTabBar> {
         },
         child: Container(
           alignment: Alignment.center,
-          color: index == i ? widget.activeColor ?? null : null,
+          color: index == i
+              ? widget.activeColor ?? null
+              : widget.inactiveColor ?? null,
           child: item,
         ),
       ),
